@@ -1,3 +1,81 @@
 from django.db import models
+from users.models import User
 
-# Create your models here.
+
+# Модель Category
+class Category(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+
+# Модель Size
+class Size(models.Model):
+    SIZE_CHOICES = [
+        ('XS', 'Extra Small'),
+        ('S', 'Small'),
+        ('M', 'Medium'),
+        ('L', 'Large'),
+        ('XL', 'Extra Large'),
+    ]
+
+    size = models.CharField(max_length=2, choices=SIZE_CHOICES)
+
+    def __str__(self):
+        return self.size
+
+
+# Модель Clothes
+class Clothes(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    material = models.CharField(max_length=100)
+    size = models.ForeignKey(Size, on_delete=models.CASCADE)
+    color = models.CharField(max_length=100)
+    category = models.ManyToManyField(Category)
+
+    def __str__(self):
+        return self.title
+
+
+# Модель Post
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    address = models.CharField(max_length=100)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    contact = models.ForeignKey(User, on_delete=models.CASCADE)
+    clothes = models.ManyToManyField(Clothes)
+
+    def __str__(self):
+        return self.title
+
+
+# Модель RentalRequest
+class RentalRequest(models.Model):
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    quantity = models.PositiveIntegerField()
+    comment = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Request by {self.user.email} for {self.post.title}"
+
+
+# Модель Transaction
+class Transaction(models.Model):
+    date = models.DateTimeField(auto_now_add=True)
+    cost = models.DecimalField(max_digits=10, decimal_places=2)
+    rental_period_start = models.DateTimeField()
+    rental_period_end = models.DateTimeField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Transaction by {self.user.email} for {self.post.title}"
