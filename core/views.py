@@ -1,27 +1,47 @@
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import PostForm, ClothesForm, RentalRequestForm, TransactionForm
+from .forms import PostForm, ClothesForm, RentalRequestForm, TransactionForm, RegistrationForm
 from .models import Post, Clothes, RentalRequest, Transaction
 
+def home(request):
+    return render(request, 'home.html')
 
-# Views for Post model
-def post_list(request):
-    posts = Post.objects.all()
-    return render(request, 'posts/post_list.html', {'posts': posts})
-
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    return render(request, 'posts/post_detail.html', {'post': post})
-
-def post_create(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST)
+def register(request):
+    if request.method == "POST":
+        form = RegistrationForm(request.POST)
         if form.is_valid():
-            post = form.save()
-            return redirect('posts/post_detail', pk=post.pk)
+            user = form.save()
+            email = form.cleaned_data.get('email')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(request, email=email, password=raw_password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'Registration successful.')
+                return redirect('home')
+            else:
+                messages.error(request, 'Authentication failed.')
     else:
-        form = PostForm()
-    return render(request, 'posts/create_post.html', {'form': form})
+        form = RegistrationForm()
+    return render(request, 'registration/register.html', {"form": form})
+
+def user_login(request):
+    if request.method == "POST":
+        email = request.POST['email']
+        password = request.POST['password']
+        user = authenticate(request, email=email, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, 'Login successful.')
+            return redirect('home')
+        else:
+            messages.error(request, 'Invalid login credentials.')
+    return render(request, 'registration/login.html')
+
+def user_logout(request):
+    logout(request)
+    return redirect('home')
 
 
 # Views for Clothes model
@@ -42,6 +62,37 @@ def create_clothes(request):
     else:
         form = ClothesForm()
     return render(request, 'clothes/create_clothes.html', {'form': form})
+
+
+# Views for Post model
+def post_list(request):
+    posts = Post.objects.all()
+    return render(request, 'posts/post_list.html', {'posts': posts})
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'posts/post_detail.html', {'post': post})
+
+def create_post(request):
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save()
+            return redirect('posts/post_detail', pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'posts/create_post.html', {'form': form})
+
+def approve_post(request):
+    posts = Post.objects.filter(is_approved=True)
+    if request.method == 'POST':
+        for post in posts:
+            if str(post.pk) not in request.POST:
+                post.is_approved = True
+                post.save()
+        return redirect('home')
+    return render(request, 'posts/approve_post.html', {'posts': posts})
+
 
 
 # Views for RentalRequest model

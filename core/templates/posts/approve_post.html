@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approve Posts</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <h1 class="text-3xl font-bold mb-4">Approve Posts</h1>
+        <form method="post" class="bg-white p-6 rounded shadow-md">
+            {% csrf_token %}
+            <div class="space-y-4">
+                {% for post in posts %}
+                <div class="flex items-center p-4 border rounded">
+                    <input type="checkbox" name="{{ post.pk }}" id="post_{{ post.pk }}" class="mr-4">
+                    <label for="post_{{ post.pk }}" class="text-lg">
+                        <h2 class="font-bold">{{ post.title }}</h2>
+                        <p>{{ post.description }}</p>
+                    </label>
+                </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Approve Selected Posts
+            </button>
+        </form>
+    </div>
+</body>
+</html>

@@ -9,14 +9,15 @@
 <body class="flex flex-col min-h-screen">
     <nav class="bg-gray-800 text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="{% url 'home' %}" class="text-xl font-bold">My Site</a>
+            <a href="{% url 'home' %}" class="text-xl font-bold">Rental&Clothes</a>
             <div class="space-x-4">
                 <a href="{% url 'home' %}" class="hover:text-gray-300">Home</a>
                 <div class="dropdown inline-block relative">
                     <button class="hover:text-gray-300">Posts</button>
                     <ul class="dropdown-menu absolute hidden text-gray-700 pt-2">
                         <li><a href="{% url 'post_list' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">Post List</a></li>
-                        <li><a href="{% url 'post_create' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">Create Post</a></li>
+                        <li><a href="{% url 'create_post' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">Create Post</a></li>
+                        <li><a href="{% url 'approve_post' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">Approve Post</a></li>
                     </ul>
                 </div>
                 <div class="dropdown inline-block relative">
@@ -40,6 +41,14 @@
                         <li><a href="{% url 'create_transaction' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">Create Transaction</a></li>
                     </ul>
                 </div>
+                <div class="dropdown inline-block relative">
+                    <button class="hover:text-gray-300">Sign In</button>
+                    <ul class="dropdown-menu absolute hidden text-gray-700 pt-2">
+                        <li><a href="{% url 'login' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">Login</a></li>
+                        <li><a href="{% url 'register' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">Registration</a></li>
+                        <li><a href="{% url 'logout' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">LogOut</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -51,7 +60,7 @@
 
     <footer class="bg-gray-800 text-white p-4 mt-auto">
         <div class="container mx-auto text-center">
-            <p>&copy; 2023 My Site. All rights reserved.</p>
+            <p>&copy; 2025 rental. All rights reserved.</p>
         </div>
     </footer>
 
