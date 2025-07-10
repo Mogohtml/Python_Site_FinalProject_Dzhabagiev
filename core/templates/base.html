@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}My Site{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex flex-col min-h-screen">
+    <nav class="bg-gray-800 text-white p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{% url 'home' %}" class="text-xl font-bold">My Site</a>
+            <div class="space-x-4">
+                <a href="{% url 'home' %}" class="hover:text-gray-300">Home</a>
+                <div class="dropdown inline-block relative">
+                    <button class="hover:text-gray-300">Posts</button>
+                    <ul class="dropdown-menu absolute hidden text-gray-700 pt-2">
+                        <li><a href="{% url 'post_list' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">Post List</a></li>
+                        <li><a href="{% url 'post_create' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">Create Post</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown inline-block relative">
+                    <button class="hover:text-gray-300">Clothes</button>
+                    <ul class="dropdown-menu absolute hidden text-gray-700 pt-2">
+                        <li><a href="{% url 'clothes_list' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">Clothes List</a></li>
+                        <li><a href="{% url 'create_clothes' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">Create Clothes</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown inline-block relative">
+                    <button class="hover:text-gray-300">Rentals</button>
+                    <ul class="dropdown-menu absolute hidden text-gray-700 pt-2">
+                        <li><a href="{% url 'rental_list' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">Rental List</a></li>
+                        <li><a href="{% url 'create_rental' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">Create Rental</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown inline-block relative">
+                    <button class="hover:text-gray-300">Transactions</button>
+                    <ul class="dropdown-menu absolute hidden text-gray-700 pt-2">
+                        <li><a href="{% url 'transaction_list' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">Transaction List</a></li>
+                        <li><a href="{% url 'create_transaction' %}" class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap">Create Transaction</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow container mx-auto p-4">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="bg-gray-800 text-white p-4 mt-auto">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2023 My Site. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            dropdowns.forEach(dropdown => {
+                const button = dropdown.querySelector('button');
+                const menu = dropdown.querySelector('.dropdown-menu');
+
+                button.addEventListener('click', function() {
+                    menu.classList.toggle('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

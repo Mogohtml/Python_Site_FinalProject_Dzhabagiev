@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Transaction Detail{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-4">Transaction Detail</h1>
+    <p class="text-lg mb-2"><strong>Date:</strong> {{ transaction.date }}</p>
+    <p class="text-lg mb-2"><strong>Cost:</strong> ${{ transaction.cost }}</p>
+    <p class="text-lg mb-2"><strong>Rental Period:</strong> {{ transaction.rental_period_start }} to {{ transaction.rental_period_end }}</p>
+    <p class="text-lg mb-2"><strong>User:</strong> {{ transaction.user }}</p>
+    <p class="text-lg mb-2"><strong>Post:</strong> {{ transaction.post }}</p>
+</div>
+{% endblock %}

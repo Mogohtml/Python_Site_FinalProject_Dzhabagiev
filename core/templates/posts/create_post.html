@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Create Post{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-4">Create Post</h1>
+    <form method="post" class="bg-white p-6 rounded shadow-md">
+        {% csrf_token %}
+        <div class="mb-4">
+            {{ form.title.label_tag }}
+            {{ form.title }}
+        </div>
+        <div class="mb-4">
+            {{ form.description.label_tag }}
+            {{ form.description }}
+        </div>
+        <div class="mb-4">
+            {{ form.price.label_tag }}
+            {{ form.price }}
+        </div>
+        <div class="mb-4">
+            {{ form.address.label_tag }}
+            {{ form.address }}
+        </div>
+        <div class="mb-4">
+            {{ form.start_date.label_tag }}
+            {{ form.start_date }}
+        </div>
+        <div class="mb-4">
+            {{ form.end_date.label_tag }}
+            {{ form.end_date }}
+        </div>
+        <div class="mb-4">
+            {{ form.contact.label_tag }}
+            {{ form.contact }}
+        </div>
+        <div class="mb-4">
+            {{ form.clothes.label_tag }}
+            {{ form.clothes }}
+        </div>
+        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Create Post</button>
+    </form>
+</div>
+{% endblock %}

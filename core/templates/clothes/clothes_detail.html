@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{ clothes.title }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-4">{{ clothes.title }}</h1>
+    <p class="text-lg mb-2"><strong>Description:</strong> {{ clothes.description }}</p>
+    <p class="text-lg mb-2"><strong>Material:</strong> {{ clothes.material }}</p>
+    <p class="text-lg mb-2"><strong>Size:</strong> {{ clothes.size }}</p>
+    <p class="text-lg mb-2"><strong>Color:</strong> {{ clothes.color }}</p>
+    <p class="text-lg mb-2"><strong>Category:</strong> {{ clothes.category }}</p>
+</div>
+{% endblock %}

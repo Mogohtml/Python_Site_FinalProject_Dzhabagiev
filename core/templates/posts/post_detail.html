@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+<div class="container mx-auto p-4">
+    <h1 class="text-3xl font-bold mb-4">{{ post.title }}</h1>
+    <p class="text-lg mb-2"><strong>Description:</strong> {{ post.description }}</p>
+    <p class="text-lg mb-2"><strong>Price:</strong> ${{ post.price }}</p>
+    <p class="text-lg mb-2"><strong>Address:</strong> {{ post.address }}</p>
+    <p class="text-lg mb-2"><strong>Start Date:</strong> {{ post.start_date }}</p>
+    <p class="text-lg mb-2"><strong>End Date:</strong> {{ post.end_date }}</p>
+    <p class="text-lg mb-2"><strong>Contact:</strong> {{ post.contact.email }}</p>
+    <p class="text-lg mb-2"><strong>Clothes:</strong> {{ post.clothes.title }}</p>
+</div>
+{% endblock %}
