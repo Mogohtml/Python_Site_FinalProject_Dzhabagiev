@@ -58,7 +58,7 @@ def create_clothes(request):
         form = ClothesForm(request.POST)
         if form.is_valid():
             clothes = form.save()
-            return redirect('clothes/clothes_detail', pk=clothes.pk)
+            return redirect('clothes_detail', pk=clothes.pk)
     else:
         form = ClothesForm()
     return render(request, 'clothes/create_clothes.html', {'form': form})

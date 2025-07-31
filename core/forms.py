@@ -26,7 +26,7 @@ class RegistrationForm(UserCreationForm):
 class PostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'description', 'image', 'price', 'address', 'start_date', 'end_date', 'contact', 'clothes']
+        fields = ['title', 'description', 'image', 'price', 'address', 'start_date', 'end_date', 'user', 'clothes']
 
 class ClothesForm(ModelForm):
     class Meta:

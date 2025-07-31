@@ -1,8 +1,8 @@
 from django.urls import path
 
-from core.views import home, clothes_list, clothes_detail, create_clothes, create_post, post_detail, post_list, \
+from core.views import home, create_post, post_detail, post_list, \
     rental_list, create_rental, transaction_list, transaction_detail, create_transaction, rental_detail, register, \
-    user_login, user_logout, approve_post
+    user_login, user_logout, approve_post, clothes_list, clothes_detail, create_clothes
 
 urlpatterns = [
     # Home
@@ -11,10 +11,6 @@ urlpatterns = [
     # Authentication
     path('register/', register, name='register'),
     path('login/', user_login, name='login'),
-    # Clothes URLs
-    path('clothes/', clothes_list, name='clothes_list'),
-    path('clothes/<int:pk>/', clothes_detail, name='clothes_detail'),
-    path('create_clothes/', create_clothes, name='create_clothes'),
     # Post URLs
     path('posts/', post_list, name='post_list'),
     path('posts/<int:pk>/', post_detail, name='post_detail'),
@@ -28,4 +24,8 @@ urlpatterns = [
     path('transactions/', transaction_list, name='transaction_list'),
     path('transactions/<int:pk>/', transaction_detail, name='transaction_detail'),
     path('create_transaction/', create_transaction, name='create_transaction'),
+    # Clothes URLs
+    path('clothes/', clothes_list, name='clothes_list'),
+    path('clothes/<int:pk>/', clothes_detail, name='clothes_detail'),
+    path('create_clothes/', create_clothes, name='create_clothes'),
 ]
